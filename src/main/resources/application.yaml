@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: user-api
+  r2dbc:
+    name: postgres-r2dbc
+    url: r2dbc:postgresql://users.cndgenezdyhb.us-east-2.rds.amazonaws.com:5432/users
+    username: usersubr
+    password: user\$pass
+    pool:
+      enabled: true
+      initial-size: 1
+      max-size: 50
+      max-idle-time: 15m
+      validation-query: SELECT 1
+      max-create-connection-time: 5s
+      max-acquire-time: 60s
+      max-life-time: 15s
+
+infrasctruture:
+  http:
+    auth:
+      url:

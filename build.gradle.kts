@@ -41,9 +41,8 @@ dependencies {
 	implementation("io.swagger.core.v3:swagger-jaxrs2:2.2.8")
 
 	//Database
-	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-	implementation("org.postgresql:postgresql")
-	implementation("org.postgresql:postgresql:42.6.0")
+	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+	implementation("org.springframework.data:spring-data-jpa")
 
 }
 

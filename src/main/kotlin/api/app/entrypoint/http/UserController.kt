@@ -1,7 +1,8 @@
-package app.entrypoint.http
+package api.app.entrypoint.http
 
-import app.entrypoint.http.UserController.Companion.USER_TAG
-import domain.dto.UserDTO
+import api.app.entrypoint.http.UserController.Companion.USER_TAG
+import api.domain.dto.UserDTO
+import api.domain.service.users.UsersService
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.info.Contact
@@ -12,14 +13,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestHeader
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import ps.investments.stockmarket.position.customer.app.entrypoint.http.handler.model.ErrorDetails
-import utils.Constants.PASSWORD_HEADER
-import utils.Constants.USERNAME_HEADER
+import api.utils.Constants.PASSWORD_HEADER
+import api.utils.Constants.USERNAME_HEADER
 
 @RestController
 @RequestMapping("api/user")
@@ -38,7 +35,7 @@ import utils.Constants.USERNAME_HEADER
             name = USER_TAG,
         )]
 )
-class UserController() {
+class UserController(private val usersService: UsersService) {
 
     private val log = LoggerFactory.getLogger(javaClass)
 
@@ -70,11 +67,7 @@ class UserController() {
     )
     fun findUserList(): List<UserDTO> {
         log.info("Retriving list of all users")
-        return listOf(
-            UserDTO("Teste Tetoso", "Senha", "email@gmail.com"),
-            UserDTO("Tonho da Lua", "Senha", "email@gmail.com"),
-            UserDTO("Tabatinga", "Senha", "email@gmail.com"),
-        )
+        return usersService.findAllUsers()
     }
 
     @PostMapping("/auth")

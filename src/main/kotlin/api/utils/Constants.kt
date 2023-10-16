@@ -1,4 +1,4 @@
-package utils
+package api.utils
 
 object Constants {
     const val USERNAME_HEADER = "X-USERNAME"

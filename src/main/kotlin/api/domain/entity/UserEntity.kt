@@ -1,6 +1,6 @@
-package domain.entity
+package api.domain.entity
 
-import domain.dto.UserDTO
+import api.domain.dto.UserDTO
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
@@ -13,7 +13,6 @@ class UserEntity(
     val id: UUID? = null,
     val name: String,
     val password: String,
-    @Email
     val email: String,
     val createdAt: LocalDateTime? = null,
     val updateAt: LocalDateTime? = null

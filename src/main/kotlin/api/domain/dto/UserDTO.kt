@@ -1,6 +1,6 @@
-package domain.dto
+package api.domain.dto
 
-import domain.entity.UserEntity
+import api.domain.entity.UserEntity
 import javax.validation.constraints.Email
 
 class UserDTO(

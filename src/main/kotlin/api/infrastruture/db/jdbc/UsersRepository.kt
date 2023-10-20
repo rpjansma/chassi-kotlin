@@ -7,6 +7,5 @@ import java.util.*
 
 @Repository
 interface UsersRepository : CrudRepository<UserEntity, UUID> {
-
     fun findUserByEmail(email: String): UserEntity
 }

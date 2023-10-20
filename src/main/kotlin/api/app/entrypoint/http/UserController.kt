@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import ps.investments.stockmarket.position.customer.app.entrypoint.http.handler.model.ErrorDetails
+import api.app.entrypoint.handler.model.ErrorDetails
 import api.utils.Constants.PASSWORD_HEADER
 import api.utils.Constants.USERNAME_HEADER
 

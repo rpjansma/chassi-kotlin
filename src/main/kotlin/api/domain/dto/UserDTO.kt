@@ -1,12 +1,10 @@
 package api.domain.dto
 
 import api.domain.entity.UserEntity
-import javax.validation.constraints.Email
 
 class UserDTO(
     val name: String,
     val password: String,
-    @Email
     val email: String
 )
 

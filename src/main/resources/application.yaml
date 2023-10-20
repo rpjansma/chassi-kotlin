@@ -2,9 +2,12 @@ spring:
   application:
     name: user-api
   datasource:
-    url: jdbc:sqlite:C:\Users\rpjan\Documents\Projects\database\database.sqlite
+    url: jdbc:postgresql://localhost:4000/users
+    username: usersubr
+    password: userspassword
+    driver-class-name: org.postgresql.Driver
 
-infrasctruture:
+infrastructure:
   http:
     auth:
       url:

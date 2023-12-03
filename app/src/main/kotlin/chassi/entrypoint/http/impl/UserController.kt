@@ -3,6 +3,8 @@ package api.app.entrypoint.http
 import api.app.entrypoint.http.UserController.Companion.USER_TAG
 import api.domain.dto.UserDTO
 import api.domain.service.users.UsersService
+import api.utils.Constants.PASSWORD_HEADER
+import api.utils.Constants.USERNAME_HEADER
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.info.Contact
@@ -14,9 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import api.app.entrypoint.handler.model.ErrorDetails
-import api.utils.Constants.PASSWORD_HEADER
-import api.utils.Constants.USERNAME_HEADER
+import ps.investments.stockmarket.dividends.events.app.entrypoint.handler.entity.ErrorDetails
 
 @RestController
 @RequestMapping("api/user")

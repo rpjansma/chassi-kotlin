@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
-import api.app.entrypoint.handler.model.ErrorDetails
+import ps.investments.stockmarket.dividends.events.app.entrypoint.handler.entity.ErrorDetails
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter

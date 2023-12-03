@@ -1,14 +1,10 @@
 package api.domain.entity
 
 import api.domain.dto.UserDTO
-import org.springframework.data.annotation.Id
-import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 import java.util.*
 
-@Table("users")
 class UserEntity(
-    @Id
     val id: UUID? = null,
     val name: String,
     val password: String,

@@ -1,0 +1,168 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: k8sNameSpace
+  labels:
+    app: projectName
+  name: projectName
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: projectName
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubernetes.io/change-cause: "Version: tagVersion"
+      labels:
+        app: projectName
+    spec:
+      terminationGracePeriodSeconds: 20
+      containers:
+        - image: registry/projectGroup/projectName:tagVersion
+          imagePullPolicy: Always
+          name: projectName
+          ports:
+            - containerPort: appPort
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: projectName-secret
+          env:
+            - name: JAVA_OPTS
+              value: -Xmx768m -Dspring.profiles.active=tier -Dfile.encoding=UTF-8 -Duser.country=BR -Duser.language=pt -Duser.timezone=America/Sao_Paulo -javaagent:/opt/newrelic/newrelic.jar -Dnewrelic.config.labels="team:Paris;slack:#inv-paris;email:l-investimentos-paris@uolinc.com;environment:tier;dc:dcenv"
+            - name: NEW_RELIC_LABELS
+              value: team:Paris;slack:#inv-paris;enviroment:tier;dc:dcenv
+            - name: NEW_RELIC_LICENSE_KEY
+              value: nr_key
+            - name: NEW_RELIC_APP_NAME
+              value: projectName
+            - name: NEW_RELIC_DISTRIBUTED_TRACING_ENABLED
+              value: "true"
+            - name: NEW_RELIC_LOG
+              value: STDOUT
+            - name: SPRING_PROFILES_ACTIVE
+              value: tier
+            - name: VERSION
+              value: tagVersion
+            - name: SERVER_SHUTDOWN
+              value: "graceful"
+            - name: MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED
+              value: "true"
+            - name: MANAGEMENT_HEALTH_READINESSTATE_ENABLED
+              value: "true"
+            - name: MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED
+              value: "true"
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sh", "-c", "sleep 70"]
+          resources:
+            requests:
+              cpu: "0.4"
+              memory: "256Mi"
+            limits:
+              memory: "700Mi"
+              cpu: "0.7"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: appPort
+            initialDelaySeconds: 95
+            timeoutSeconds: 3
+            periodSeconds: 5
+            failureThreshold: 15
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: appPort
+            initialDelaySeconds: 95
+            timeoutSeconds: 3
+            periodSeconds: 5
+            failureThreshold: 15
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: projectName-secret
+  labels:
+    app: projectName
+  namespace: k8sNameSpace
+data:
+  DB_USER: secretDbUser
+  DB_PASS: secretDbPass
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: projectName
+  name: projectName
+  namespace: k8sNameSpace
+spec:
+  ports:
+    - port: 80
+      targetPort: appPort
+  selector:
+    app: projectName
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: projectName
+  namespace: k8sNameSpace
+  annotations:
+    cert-manager.io/cluster-issuer: pagpki-kubernetes
+    kubernetes.io/ingress.class: traefik-internal
+spec:
+  tls:
+    - hosts:
+        - hostLB
+      secretName: hostLB
+  rules:
+    - host: projectName.k8s.tier.dcenv.intranet.pags
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: projectName
+                port:
+                  number: 80
+    - host: hostLB
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: projectName
+                port:
+                  number: 80
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: projectName
+  namespace: k8sNameSpace
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: projectName
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80

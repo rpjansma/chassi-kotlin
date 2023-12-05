@@ -34,11 +34,11 @@ dependencies {
 	// Database
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-	implementation("org.postgresql:postgresql:42.6.0")
+	implementation("org.postgresql:postgresql")
 
 	// SLF4J and Logging
 	implementation("org.slf4j:slf4j-api:1.7.36")
-	implementation("org.slf4j:log4j-over-slf4j:1.7.36") // Use Log4j binding
+	implementation("org.slf4j:log4j-over-slf4j:1.7.36")
 }
 
 tasks.withType<KotlinCompile> {

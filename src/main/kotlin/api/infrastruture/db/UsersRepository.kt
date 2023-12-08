@@ -1,11 +1,11 @@
-package api.infrastruture.db.jdbc
+package api.infrastruture.db
 
 import api.domain.entity.UserEntity
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface UsersRepository : CrudRepository<UserEntity, UUID> {
+interface UsersRepository : JpaRepository<UserEntity, UUID> {
     fun findUserByEmail(email: String): UserEntity
 }

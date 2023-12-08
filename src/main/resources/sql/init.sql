@@ -1,4 +1,6 @@
-CREATE DATABASE usersapi;
+CREATE DATABASE usersapi_adm;
+
+USE usersapi_adm;
 
 CREATE TABLE users (
     id UUID PRIMARY KEY,

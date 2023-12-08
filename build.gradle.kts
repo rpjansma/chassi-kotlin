@@ -21,15 +21,15 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
-	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 
 	// Kotlin
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.0")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+	implementation ("org.jetbrains.kotlin:kotlin-reflect")
 
 	// Swagger
-	implementation("io.springfox:springfox-boot-starter:3.0.0")
+	implementation("io.swagger.core.v3:swagger-jaxrs2:2.1.7")
 
 	// Database
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")

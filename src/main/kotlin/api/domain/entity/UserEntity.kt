@@ -1,11 +1,14 @@
 package api.domain.entity
 
 import api.domain.dto.UserDTO
-import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
+import java.util.UUID
 import java.util.*
+import javax.persistence.Entity
+import javax.persistence.Id
 
+@Entity
 @Table("users")
 class UserEntity(
     @Id

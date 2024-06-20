@@ -33,6 +33,10 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
+    display-request-duration: true
+    groups-order: asc
+
+
 
 server:
   compression:

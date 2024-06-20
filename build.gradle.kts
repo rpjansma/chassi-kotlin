@@ -8,7 +8,7 @@ plugins {
 
 group = "kotlin"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
@@ -29,7 +29,9 @@ dependencies {
 	implementation ("org.jetbrains.kotlin:kotlin-reflect")
 
 	// Swagger
-	implementation("io.swagger.core.v3:swagger-jaxrs2:2.1.7")
+	implementation("org.springdoc:springdoc-openapi-starter-common:2.0.2")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+	implementation("io.swagger.core.v3:swagger-annotations-jakarta:2.2.7")
 
 	// Database
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -44,7 +46,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
+		jvmTarget = "17"
 	}
 }
 

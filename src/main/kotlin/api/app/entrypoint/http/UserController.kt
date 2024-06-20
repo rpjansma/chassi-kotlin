@@ -19,7 +19,7 @@ import api.utils.Constants.PASSWORD_HEADER
 import api.utils.Constants.USERNAME_HEADER
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/users")
 @OpenAPIDefinition(
     info = Info(
         title = "User API",

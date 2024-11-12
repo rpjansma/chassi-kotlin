@@ -8,7 +8,7 @@ plugins {
 
 group = "kotlin"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
@@ -20,23 +20,23 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-sleuth:3.1.9")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-
-
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
-	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 
 	// Kotlin
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.0")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+	implementation ("org.jetbrains.kotlin:kotlin-reflect")
 
 	// Swagger
-	implementation("io.springfox:springfox-boot-starter:3.0.0")
+	implementation("org.springdoc:springdoc-openapi-starter-common:2.0.2")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+	implementation("io.swagger.core.v3:swagger-annotations-jakarta:2.2.7")
 
 	// Database
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-	implementation("org.postgresql:postgresql:42.6.0")
+	implementation("org.postgresql:postgresql")
 
 	// SLF4J and Logging
 	implementation("org.slf4j:slf4j-api:1.7.36")
@@ -49,7 +49,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
+		jvmTarget = "17"
 	}
 }
 

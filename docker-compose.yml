@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: kotlin-chassi-db
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: usersubr
+      POSTGRES_PASSWORD: userspassword
+      POSTGRES_DB: kotlin-chassi
+    volumes:
+      - ./src/main/resources/sql/init.sql:/docker-entrypoint-initdb.d/init.sql

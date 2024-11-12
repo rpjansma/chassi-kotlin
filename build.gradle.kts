@@ -20,6 +20,8 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-sleuth:3.1.9")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 
@@ -38,7 +40,10 @@ dependencies {
 
 	// SLF4J and Logging
 	implementation("org.slf4j:slf4j-api:1.7.36")
-	implementation("org.slf4j:log4j-over-slf4j:1.7.36") // Use Log4j binding
+	implementation("org.slf4j:log4j-over-slf4j:1.7.36")
+
+	//EmailSender
+	implementation("org.springframework.boot:spring-boot-starter-mail")
 }
 
 tasks.withType<KotlinCompile> {

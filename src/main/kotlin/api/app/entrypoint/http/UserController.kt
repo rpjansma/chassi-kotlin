@@ -1,40 +1,20 @@
 package api.app.entrypoint.http
 
-import api.app.entrypoint.http.UserController.Companion.USER_TAG
+import api.app.entrypoint.handler.model.ErrorDetails
 import api.domain.dto.UserDTO
 import api.domain.service.users.UsersService
-import io.swagger.v3.oas.annotations.OpenAPIDefinition
+import api.utils.Constants.PASSWORD_HEADER
+import api.utils.Constants.USERNAME_HEADER
 import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.info.Contact
-import io.swagger.v3.oas.annotations.info.Info
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
-import io.swagger.v3.oas.annotations.tags.Tag
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import api.app.entrypoint.handler.model.ErrorDetails
-import api.utils.Constants.PASSWORD_HEADER
-import api.utils.Constants.USERNAME_HEADER
 
 @RestController
 @RequestMapping("api/users")
-@OpenAPIDefinition(
-    info = Info(
-        title = "User API",
-        version = "0.0.1",
-        description = "Api de utilidades para usuários",
-        contact = Contact(
-            url = "https://www.linkedin.com/in/raul-paes/",
-            name = "Raul Paes"
-        )
-    ),
-    tags = [
-        Tag(
-            name = USER_TAG,
-        )]
-)
 class UserController(private val usersService: UsersService) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -66,7 +46,7 @@ class UserController(private val usersService: UsersService) {
             )]
     )
     fun findUserList(): List<UserDTO> {
-        log.info("Retriving list of all users")
+        log.info("Retrieving list of all users")
         return usersService.findAllUsers()
     }
 
@@ -96,7 +76,7 @@ class UserController(private val usersService: UsersService) {
         @RequestHeader(name = USERNAME_HEADER) username: String,
         @RequestHeader(name = PASSWORD_HEADER) password: String,
     ): ResponseEntity<Any> {
-        log.info("m=autenticateUser i=auth_user msg=Authenticating user...")
+        log.info("m=authenticateUser i=auth_user msg=Authenticating user...")
         return ResponseEntity.ok().build()
     }
 }

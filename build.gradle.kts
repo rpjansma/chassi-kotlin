@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	kotlin("jvm") version "1.6.21"
+	kotlin("plugin.jpa") version "1.6.21"
 	id("org.springframework.boot") version "2.6.6"
 	id("io.spring.dependency-management") version "1.0.14.RELEASE"
 }
@@ -29,14 +30,14 @@ dependencies {
 	implementation ("org.jetbrains.kotlin:kotlin-reflect")
 
 	// Swagger
-	implementation("org.springdoc:springdoc-openapi-starter-common:2.0.2")
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
 	implementation("io.swagger.core.v3:swagger-annotations-jakarta:2.2.7")
 
 	// Database
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 	implementation("org.postgresql:postgresql")
+	implementation("com.h2database:h2:2.2.224")
 
 	// SLF4J and Logging
 	implementation("org.slf4j:slf4j-api:1.7.36")

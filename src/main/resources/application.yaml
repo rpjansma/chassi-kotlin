@@ -1,6 +1,8 @@
 spring:
   application:
     name: user-api
+  profiles:
+    active: dev
   main:
     allow-bean-definition-overriding: true
   datasource:
@@ -23,18 +25,26 @@ spring:
       hibernate:
         database-platform: org.postgresql.Driver
       show-sql: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: events.ap.eye@gmail.com
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 
 
 springdoc:
-  auto-tag-classes: false
-  show-actuator: false
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
   api-docs:
     path: /api-docs
-  swagger-ui:
-    path: /swagger-ui.html
-    display-request-duration: true
-    groups-order: asc
 
 
 

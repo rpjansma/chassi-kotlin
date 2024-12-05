@@ -1,4 +1,4 @@
-package api.infrastruture.db
+package api.infrastruture.db.jdbc
 
 import api.domain.entity.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
